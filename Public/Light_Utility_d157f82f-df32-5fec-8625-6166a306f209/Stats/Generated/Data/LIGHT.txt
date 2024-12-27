@@ -35,7 +35,7 @@ type "PassiveData"
 data "Properties" "Temporary;IsHidden"
 //HAD SOME ISSUES WITH REAPPLY SPAMMING IN CLOUDS (LIKE DARKNESS, FOG ETC) - ADDED SOME CHECKS
 data "Conditions" "Self() and not HasObscuredState(ObscuredState.Clear) and not HasStatus('SNEAKING',context.Source) and not HasStatus('SG_Invisible',context.Source) and not HasStatus('AURA_OF_VILEOBLIVION_BUFF') and not InSurface('SurfaceDarknessCloud') and not InSurface('SurfaceFogCloud') and not InSurface('SurfaceLava') and not InSurface('SurfaceSporeBlackCloud') and not InSurface('SurfaceStinkingCloud') and not InSurface('SurfaceCloudkillCloud')"
-data "StatsFunctorContext" "OnEquip;OnUnequip;OnMovedDistance;OnStatusRemoved"
+data "StatsFunctorContext" "OnEquip;OnUnequip;OnObscurityChanged;OnMovedDistance;OnStatusRemoved"
 data "StatsFunctors" "ApplyStatus(SELF,SIN_Light_Technical,100,-1)"
 data "Boosts" "UnlockSpell(SIN_Light_Dismiss)"
 
