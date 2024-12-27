@@ -17,8 +17,6 @@ data "TargetRadius" "18"
 data "TargetConditions" "Ally() or Item()"
 data "SpellSuccess" "AI_IGNORE:IF(Item() and HasStatus('LIGHT')):RemoveStatus(LIGHT);AI_IGNORE:IF(Item() and not HasStatus('LIGHT')):ApplyStatus(LIGHT,100,100);IF(not Item() and HasStatus('SIN_LIGHT')):ApplyStatus(SIN_LIGHT,100,0);IF(not Item() and not HasStatus('SIN_LIGHT')):ApplyStatus(SIN_LIGHT,100,-1);AI_ONLY:CAST:ApplyStatus(SELF,AI_STATUS_FAKE,100,10)"
 
-//-----------------------------------
-
 new entry "SIN_LIGHT"
 type "StatusData"
 data "StatusType" "BOOST"
@@ -69,8 +67,6 @@ data "OnApplyFunctors" "ApplyStatus(SIN_Apply_Light,100,0)"
 data "RemoveConditions" "IsInSunlight() or HasStatus('AURA_OF_VILEOBLIVION_BUFF') or HasStatus('SNEAKING') or HasStatus('SG_Invisible') or not HasStatus('SIN_LIGHT')"
 data "RemoveEvents" "OnMovedDistance;OnObscurityChanged;OnStatusApplied;OnStatusRemoved"
 data "OnRemoveFunctors" "IF(RemoveCause(StatusRemoveCause.Condition)):ApplyStatus(SIN_Remove_Light,100,0)"
-
-//-----------------------------------
 
 new entry "SIN_Apply_Light"
 type "StatusData"
@@ -146,8 +142,6 @@ data "Icon" "Spell_Evocation_Daylight"
 data "DisplayName" "h5cda27b3gda5fg4f56g89d8gb3c8be5f9bee;1"
 data "Description" "h86d23048g5852g4e75g9932g0aa84ce63b8b;1"
 
-//-----------------------------------
-
 new entry "SIN_Apply_Daylight"
 type "StatusData"
 data "StatusType" "BOOST"
@@ -212,8 +206,6 @@ data "SpellProperties" "RemoveStatus(SELF,SIN_CANDLELIGHT)"
 data "Icon" "statIcons_RadiatingOrb"
 data "DisplayName" "h2020b280g0721g48f6g9cb6g8dc5e012399f;1"
 data "Description" "h775df818g6b72g49e9g9c3ega8e7cd73941e;1"
-
-//-----------------------------------
 
 new entry "SIN_Candlelight_Orb"
 type "StatusData"
