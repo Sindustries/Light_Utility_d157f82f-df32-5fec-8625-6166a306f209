@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentList>
+	<content contentuid="heb56137dgf969g4015g83d9gc5d317214572" version="1">Autolight</content>
+	<content contentuid="h5c501017g9763g4cf9g8159g808b9f0ce60e" version="1">Weapons will glow with &lt;LSTag Type="Status" Tooltip="LIGHT"&gt;Light&lt;/LSTag&gt; when entering an obscured area. They will dim upon entering sunlight.</content>
+	<content contentuid="hcc871e17g989ag441fgbb86gcea911d6f825" version="1">Light: Dispel</content>
+	<content contentuid="haf9664dag5daag445fgb11fg9f9940ae2e4d" version="1">Remove &lt;LSTag Type="Status" Tooltip="LIGHT"&gt;Light&lt;/LSTag&gt; from currently equipped weapons and remove &lt;LSTag Type="Status" Tooltip="SIN_LIGHT"&gt;Autolight&lt;/LSTag&gt; from yourself.</content>
+	<content contentuid="h4d39bd4eg6673g4383g920fg1316c855b332" version="1">Autodaylight</content>
+	<content contentuid="h501c8532g4976g4e04g8357gdd323a6d11fc" version="1">Weapons will glow brightly with &lt;LSTag Type="Status" Tooltip="DAYLIGHT"&gt;Daylight&lt;/LSTag&gt; when entering an Obscured area. They will not dim until Long Rest or dispelled.</content>
+	<content contentuid="h5cda27b3gda5fg4f56g89d8gb3c8be5f9bee" version="1">Daylight: Dispel</content>
+	<content contentuid="h86d23048g5852g4e75g9932g0aa84ce63b8b" version="1">Remove &lt;LSTag Type="Status" Tooltip="DAYLIGHT"&gt;Daylight&lt;/LSTag&gt; from currently equipped weapons and remove &lt;LSTag Type="Status" Tooltip="SIN_DAYLIGHT"&gt;Autodaylight&lt;/LSTag&gt; from yourself.</content>
+	<content contentuid="h2ccf48a1ga645g4912ga860gfedacfac3421" version="1">Candlelight</content>
+	<content contentuid="h848c9047g2f81g4c8eg8379gedc8d5d75db8" version="1">Produce a hovering orb of light that follows the target, illuminating a [1] area.</content>
+	<content contentuid="h649cae7fg3d63g457bgb92dg1f9b08d80b3d" version="1">Candlelight</content>
+	<content contentuid="h4cec837egf309g4426g8dc3g5e7ec426a48a" version="1">A hovering orb of light will illuminate a [1] area when entering an obscured area. It will dim upon entering sunlight, sneaking or turning invisible.</content>
+	<content contentuid="h2020b280g0721g48f6g9cb6g8dc5e012399f" version="1">Candlelight: Dispel</content>
+	<content contentuid="h775df818g6b72g49e9g9c3ega8e7cd73941e" version="1">Dispel &lt;LSTag Type="Status" Tooltip="SIN_CANDLELIGHT"&gt;Candlelight&lt;/LSTag&gt;.</content>	
+</contentList>
