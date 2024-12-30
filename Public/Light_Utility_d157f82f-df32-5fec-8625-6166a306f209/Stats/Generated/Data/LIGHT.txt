@@ -1,4 +1,8 @@
 //-----------------------------------
+//-LIGHT UTILITY
+//-By Sinbane (Dehuman on Nexus)
+//-Alters the Light, Daylight and Dancing Lights spells with some quality of life features such as reapplying the effects, auto-dimming in sunlight, toggling them off/on and a full rework of Dancing Lights to make it behave more like Candlelight from Skyrim.
+//-----------------------------------
 //-LIGHT
 
 new entry "LIGHT"
@@ -64,7 +68,7 @@ data "StatusType" "BOOST"
 data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
 data "IsUnique" "1"
 data "OnApplyFunctors" "ApplyStatus(SIN_Apply_Light,100,0)"
-data "RemoveConditions" "IsInSunlight() or HasStatus('AURA_OF_VILEOBLIVION_BUFF') or HasStatus('SNEAKING') or HasStatus('SG_Invisible') or not HasStatus('SIN_LIGHT')"
+data "RemoveConditions" "IsInSunlight(context.Source) or HasStatus('AURA_OF_VILEOBLIVION_BUFF',context.Source) or HasStatus('SNEAKING',context.Source) or HasStatus('SG_Invisible',context.Source) or not HasStatus('SIN_LIGHT',context.Source)"
 data "RemoveEvents" "OnObscurityChanged;OnStatusApplied;OnStatusRemoved"
 data "OnRemoveFunctors" "IF(RemoveCause(StatusRemoveCause.Condition)):ApplyStatus(SIN_Remove_Light,100,0)"
 
@@ -72,7 +76,7 @@ new entry "SIN_Apply_Light"
 type "StatusData"
 data "StatusType" "BOOST"
 data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
-data "OnApplyFunctors" "IF(not HasStatus('LIGHT',GetItemInEquipmentSlot(EquipmentSlot.MeleeMainHand)) and IsWeaponOfProficiencyGroup('SimpleWeapons',GetItemInEquipmentSlot(EquipmentSlot.MeleeMainHand)) or IsWeaponOfProficiencyGroup('MartialWeapons',GetItemInEquipmentSlot(EquipmentSlot.MeleeMainHand))):ApplyEquipmentStatus(MeleeMainHand,LIGHT,100,-1);IF(not HasStatus('LIGHT',GetItemInEquipmentSlot(EquipmentSlot.MeleeOffHand)) and IsWeaponOfProficiencyGroup('SimpleWeapons',GetItemInEquipmentSlot(EquipmentSlot.MeleeOffHand)) or IsWeaponOfProficiencyGroup('MartialWeapons',GetItemInEquipmentSlot(EquipmentSlot.MeleeOffHand))):ApplyEquipmentStatus(MeleeOffHand,LIGHT,100,-1);IF(not HasStatus('LIGHT',GetItemInEquipmentSlot(EquipmentSlot.RangedMainHand)) and IsWeaponOfProficiencyGroup('SimpleWeapons',GetItemInEquipmentSlot(EquipmentSlot.RangedMainHand)) or IsWeaponOfProficiencyGroup('MartialWeapons',GetItemInEquipmentSlot(EquipmentSlot.RangedMainHand))):ApplyEquipmentStatus(RangedMainHand,LIGHT,100,-1);IF(not HasStatus('LIGHT',GetItemInEquipmentSlot(EquipmentSlot.RangedOffHand)) and IsWeaponOfProficiencyGroup('SimpleWeapons',GetItemInEquipmentSlot(EquipmentSlot.RangedOffHand)) or IsWeaponOfProficiencyGroup('MartialWeapons',GetItemInEquipmentSlot(EquipmentSlot.RangedOffHand))):ApplyEquipmentStatus(RangedOffHand,LIGHT,100,-1);IF(not HasStatus('LIGHT',GetItemInEquipmentSlot(EquipmentSlot.MusicalInstrument)) and IsWeaponOfProficiencyGroup('MusicalInstrument',GetItemInEquipmentSlot(EquipmentSlot.MusicalInstrument))):ApplyEquipmentStatus(MusicalInstrument,LIGHT,100,-1)"
+data "OnApplyFunctors" "IF(not HasStatus('LIGHT',GetItemInEquipmentSlot(EquipmentSlot.MeleeMainHand)) and IsWeaponOfProficiencyGroup('SimpleWeapons',GetItemInEquipmentSlot(EquipmentSlot.MeleeMainHand)) or IsWeaponOfProficiencyGroup('MartialWeapons',GetItemInEquipmentSlot(EquipmentSlot.MeleeMainHand))):ApplyEquipmentStatus(MeleeMainHand,LIGHT,100,-1);IF(not HasStatus('LIGHT',GetItemInEquipmentSlot(EquipmentSlot.MeleeOffHand)) and IsWeaponOfProficiencyGroup('SimpleWeapons',GetItemInEquipmentSlot(EquipmentSlot.MeleeOffHand)) or IsWeaponOfProficiencyGroup('MartialWeapons',GetItemInEquipmentSlot(EquipmentSlot.MeleeOffHand))):ApplyEquipmentStatus(MeleeOffHand,LIGHT,100,-1);IF(not HasStatus('LIGHT',GetItemInEquipmentSlot(EquipmentSlot.RangedMainHand)) and IsWeaponOfProficiencyGroup('SimpleWeapons',GetItemInEquipmentSlot(EquipmentSlot.RangedMainHand)) or IsWeaponOfProficiencyGroup('MartialWeapons',GetItemInEquipmentSlot(EquipmentSlot.RangedMainHand))):ApplyEquipmentStatus(RangedMainHand,LIGHT,100,-1);IF(not HasStatus('LIGHT',GetItemInEquipmentSlot(EquipmentSlot.RangedOffHand)) and IsWeaponOfProficiencyGroup('SimpleWeapons',GetItemInEquipmentSlot(EquipmentSlot.RangedOffHand)) or IsWeaponOfProficiencyGroup('MartialWeapons',GetItemInEquipmentSlot(EquipmentSlot.RangedOffHand))):ApplyEquipmentStatus(RangedOffHand,LIGHT,100,-1);IF(not HasStatus('LIGHT',GetItemInEquipmentSlot(EquipmentSlot.MusicalInstrument)) and (Tagged('MUSIC_VFX_LUTE',GetItemInEquipmentSlot(EquipmentSlot.MusicalInstrument)) or Tagged('MUSIC_VFX_VIOLIN',GetItemInEquipmentSlot(EquipmentSlot.MusicalInstrument)) or Tagged('MUSIC_VFX_FLUTE',GetItemInEquipmentSlot(EquipmentSlot.MusicalInstrument)) or Tagged('MUSIC_VFX_LYRE',GetItemInEquipmentSlot(EquipmentSlot.MusicalInstrument)) or Tagged('MUSIC_VFX_DRUM',GetItemInEquipmentSlot(EquipmentSlot.MusicalInstrument)))):ApplyEquipmentStatus(MusicalInstrument,LIGHT,100,-1)"
 
 new entry "SIN_Remove_Light"
 type "StatusData"
@@ -129,7 +133,7 @@ data "StatusType" "BOOST"
 data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
 data "IsUnique" "1"
 data "OnApplyFunctors" "ApplyStatus(SIN_Apply_Daylight,100,0)"
-data "RemoveConditions" "HasStatus('AURA_OF_VILEOBLIVION_BUFF') or HasStatus('SNEAKING') or HasStatus('SG_Invisible') or not HasStatus('SIN_DAYLIGHT')"
+data "RemoveConditions" "HasStatus('AURA_OF_VILEOBLIVION_BUFF',context.Source) or HasStatus('SNEAKING',context.Source) or HasStatus('SG_Invisible',context.Source) or not HasStatus('SIN_DAYLIGHT',context.Source)"
 data "RemoveEvents" "OnStatusApplied;OnStatusRemoved"
 data "OnRemoveFunctors" "IF(RemoveCause(StatusRemoveCause.Condition)):ApplyStatus(SIN_Remove_Daylight,100,0)"
 
@@ -217,5 +221,5 @@ data "Boosts" "GameplayLight(3,false,0.1)"
 data "IsUnique" "1"
 data "StatusEffect" "c15c513d-b7df-43c9-b35d-b3e73b5c51b7"
 data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
-data "RemoveConditions" "IsInSunlight() or HasStatus('AURA_OF_VILEOBLIVION_BUFF') or HasStatus('SNEAKING') or HasStatus('SG_Invisible')"
+data "RemoveConditions" "IsInSunlight(context.Source) or HasStatus('AURA_OF_VILEOBLIVION_BUFF',context.Source) or HasStatus('SNEAKING',context.Source) or HasStatus('SG_Invisible',context.Source)"
 data "RemoveEvents" "OnObscurityChanged;OnStatusApplied"
