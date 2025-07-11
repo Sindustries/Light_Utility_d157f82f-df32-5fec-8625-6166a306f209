@@ -1,7 +1,7 @@
 //-----------------------------------
 //-LIGHT UTILITY
 //-By Sinbane (Dehuman on Nexus)
-//-Alters the Light, Daylight and Dancing Lights spells with some quality of life features such as reapplying the effects, auto-dimming in sunlight, toggling them off/on and a full rework of Dancing Lights to make it behave more like Candlelight from Skyrim.
+//-Alters the Light, Daylight, Dancing Lights and Produce Flame spells with some quality of life features such as reapplying the effects, auto-dimming in sunlight, toggling them off/on and a full rework of Dancing Lights to make it behave more like Candlelight from Skyrim.
 //-----------------------------------
 //-LIGHT
 
@@ -40,8 +40,8 @@ new entry "SIN_Light_Passive"
 type "PassiveData"
 data "Properties" "Temporary;IsHidden"
 //HAD SOME ISSUES WITH REAPPLY SPAMMING IN CLOUDS (LIKE DARKNESS, FOG ETC) - ADDED SOME CHECKS
-data "Conditions" "Self() and not HasObscuredState(ObscuredState.Clear) and not HasStatus('SNEAKING',context.Source) and not HasStatus('SG_Invisible',context.Source) and not HasStatus('AURA_OF_VILEOBLIVION_BUFF') and not InSurface('SurfaceDarknessCloud') and not InSurface('SurfaceFogCloud') and not InSurface('SurfaceLava') and not InSurface('SurfaceSporeBlackCloud') and not InSurface('SurfaceStinkingCloud') and not InSurface('SurfaceCloudkillCloud')"
-data "StatsFunctorContext" "OnEquip;OnUnequip;OnMovedDistance;OnStatusRemoved"
+data "Conditions" "Self() and not HasObscuredState(ObscuredState.Clear) and not HasStatus('SNEAKING',context.Source) and not HasStatus('SG_Invisible',context.Source) and not HasStatus('AURA_OF_VILEOBLIVION_BUFF') and not HasStatus('SCL_MOONSHIELD') and not InSurface('SurfaceDarknessCloud') and not InSurface('SurfaceFogCloud') and not InSurface('SurfaceLava') and not InSurface('SurfaceSporeBlackCloud') and not InSurface('SurfaceStinkingCloud') and not InSurface('SurfaceCloudkillCloud')"
+data "StatsFunctorContext" "OnEquip;OnUnequip;OnMovedDistance;OnStatusApplied;OnStatusRemoved"
 data "StatsFunctors" "ApplyStatus(SELF,SIN_Light_Technical,100,-1)"
 data "Boosts" "UnlockSpell(SIN_Light_Dismiss)"
 
@@ -70,7 +70,7 @@ data "StatusType" "BOOST"
 data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
 data "IsUnique" "1"
 data "OnApplyFunctors" "ApplyStatus(SIN_Apply_Light,100,0)"
-data "RemoveConditions" "IsInSunlight(context.Source) or HasStatus('AURA_OF_VILEOBLIVION_BUFF',context.Source) or HasStatus('SNEAKING',context.Source) or HasStatus('SG_Invisible',context.Source) or not HasStatus('SIN_LIGHT',context.Source)"
+data "RemoveConditions" "IsInSunlight(context.Source) or HasStatus('AURA_OF_VILEOBLIVION_BUFF',context.Source) or HasStatus('SCL_MOONSHIELD',context.Source) or HasStatus('SNEAKING',context.Source) or HasStatus('SG_Invisible',context.Source) or not HasStatus('SIN_LIGHT',context.Source)"
 data "RemoveEvents" "OnObscurityChanged;OnStatusApplied;OnStatusRemoved"
 data "OnRemoveFunctors" "IF(RemoveCause(StatusRemoveCause.Condition)):ApplyStatus(SIN_Remove_Light,100,0)"
 
@@ -169,7 +169,7 @@ new entry "Target_DancingLights"
 type "SpellData"
 data "SpellType" "Target"
 using "Target_DancingLights"
-data "SpellProperties" "AI_IGNORE:IF(Ally() and HasStatus('SIN_CANDLELIGHT')):RemoveStatus(SIN_CANDLELIGHT);AI_IGNORE:IF(Ally() and not HasStatus('SIN_CANDLELIGHT')):ApplyStatus(SIN_CANDLELIGHT,100,-1);AI_ONLY:GROUND:Summon(2064328c-a090-454f-b3b8-b488bbe64567, 10,,,,DANCING_LIGHTS)"
+data "SpellProperties" "AI_IGNORE:IF(Ally() and HasStatus('SIN_CANDLELIGHT')):RemoveStatus(SIN_CANDLELIGHT);AI_IGNORE:IF(Ally() and not HasStatus('SIN_CANDLELIGHT')):ApplyStatus(SIN_CANDLELIGHT,100,-1);AI_ONLY:GROUND:Summon(2064328c-a090-454f-b3b8-b488bbe64567,10,,,,DANCING_LIGHTS)"
 //data "TargetConditions" "Ally()"
 data "TargetRadius" "18"
 data "Icon" "Spell_Evocation_DancingLights"
@@ -203,8 +203,8 @@ data "DisplayName" "h9e37347dgb0edg4632g917cg6092180c0607;1"
 data "Description" "h149d42f7g6414g43dag8262g718e7b0b8b6c;1"
 data "Icon" "statIcons_RadiatingOrb"
 data "Properties" "IsHidden"
-data "Conditions" "Self() and not HasStatus('SIN_Candlelight_Orb') and not HasObscuredState(ObscuredState.Clear) and not HasStatus('AURA_OF_VILEOBLIVION_BUFF') and not HasStatus('SNEAKING') and not HasStatus('SG_Invisible') and not InSurface('SurfaceDarknessCloud') and not InSurface('SurfaceFogCloud') and not InSurface('SurfaceLava') and not InSurface('SurfaceSporeBlackCloud') and not InSurface('SurfaceStinkingCloud') and not InSurface('SurfaceCloudkillCloud')"
-data "StatsFunctorContext" "OnMovedDistance;OnStatusRemoved"
+data "Conditions" "Self() and not HasStatus('SIN_Candlelight_Orb') and not HasObscuredState(ObscuredState.Clear) and not HasStatus('AURA_OF_VILEOBLIVION_BUFF') and not HasStatus('SCL_MOONSHIELD') and not HasStatus('SNEAKING') and not HasStatus('SG_Invisible') and not InSurface('SurfaceDarknessCloud') and not InSurface('SurfaceFogCloud') and not InSurface('SurfaceLava') and not InSurface('SurfaceSporeBlackCloud') and not InSurface('SurfaceStinkingCloud') and not InSurface('SurfaceCloudkillCloud')"
+data "StatsFunctorContext" "OnMovedDistance;OnStatusApplied;OnStatusRemoved"
 data "StatsFunctors" "ApplyStatus(SELF,SIN_Candlelight_Orb,100,-1)"
 data "Boosts" "UnlockSpell(SIN_Candlelight_Dismiss)"
 
@@ -226,5 +226,39 @@ data "Boosts" "GameplayLight(3,false,0.1)"
 data "IsUnique" "1"
 data "StatusEffect" "c15c513d-b7df-43c9-b35d-b3e73b5c51b7"
 data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
-data "RemoveConditions" "IsInSunlight(context.Source) or HasStatus('AURA_OF_VILEOBLIVION_BUFF',context.Source) or HasStatus('SNEAKING',context.Source) or HasStatus('SG_Invisible',context.Source)"
+data "RemoveConditions" "IsInSunlight(context.Source) or HasStatus('AURA_OF_VILEOBLIVION_BUFF',context.Source) or HasStatus('SCL_MOONSHIELD',context.Source) or HasStatus('SNEAKING',context.Source) or HasStatus('SG_Invisible',context.Source)"
 data "RemoveEvents" "OnObscurityChanged;OnStatusApplied"
+
+//-----------------------------------
+//-PRODUCE FLAME
+
+new entry "PRODUCE_FLAME"
+type "StatusData"
+data "StatusType" "BOOST"
+using "PRODUCE_FLAME"
+data "Boosts" "UnlockSpell(Shout_ProduceFlame_Dismiss)"
+data "SoundLoop" ""
+data "SoundStop" ""
+data "StatusGroups" "SG_RemoveOnRespec"
+data "StatusEffect" ""
+data "Passives" "SIN_Produce_Flame_Passive"
+
+new entry "SIN_Produce_Flame_Passive"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "Conditions" "Self() and not HasStatus('SIN_Produce_Flame') and not HasObscuredState(ObscuredState.Clear) and not HasStatus('AURA_OF_VILEOBLIVION_BUFF') and not HasStatus('SCL_MOONSHIELD') and not HasStatus('SNEAKING') and not HasStatus('SG_Invisible') and not InSurface('SurfaceDarknessCloud') and not InSurface('SurfaceFogCloud') and not InSurface('SurfaceLava') and not InSurface('SurfaceSporeBlackCloud') and not InSurface('SurfaceStinkingCloud') and not InSurface('SurfaceCloudkillCloud')"
+data "StatsFunctorContext" "OnMovedDistance;OnStatusApplied;OnStatusRemoved"
+data "StatsFunctors" "ApplyStatus(SELF,SIN_Produce_Flame,100,-1)"
+
+new entry "SIN_Produce_Flame"
+type "StatusData"
+data "StatusType" "BOOST"
+data "SoundLoop" "Spell_Status_ProduceFlame_MO"
+data "SoundStop" "Spell_Status_ProduceFlame_MO_Stop"
+data "Boosts" "GameplayLight(9,false,0.1)"
+data "IsUnique" "1"
+data "StatusEffect" "7b9c612c-3780-45eb-a146-fc472c37c2c4"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+data "RemoveConditions" "IsInSunlight(context.Source) or HasStatus('AURA_OF_VILEOBLIVION_BUFF',context.Source) or HasStatus('SCL_MOONSHIELD',context.Source) or HasStatus('SNEAKING',context.Source) or HasStatus('SG_Invisible',context.Source)"
+data "RemoveEvents" "OnObscurityChanged;OnStatusApplied"
+data "StatusGroups" "SG_Light"
